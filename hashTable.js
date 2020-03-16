@@ -8,15 +8,21 @@ var HashTable = function() {
 
 
 HashTable.prototype.insert = function(key, value) {
+  this._storage[this.hashFunc(key, this._limit)].set (key,value)
 };
 
 
 HashTable.prototype.remove = function(key) {
+  var tempValue= this.retrieve(key)
+  this._storage[this.hashFunc(key, this._limit)].delete (key)
+  return tempValue
 };
+//};
 
 
 
 HashTable.prototype.retrieve = function(key) {
+  return this._storage[this.hashFunc(key, this._limit)].get (key)
 };
 
 
@@ -32,9 +38,12 @@ HashTable.prototype.hashFunc = function(str, max) {
 
 
 HashTable.prototype.resize = function(newLimit) {
+  this._Limit= newLimit;
 };
 
 
 HashTable.prototype.retrieveAll = function() {
   return this._storage;
 };
+
+var hashTB= new HashTable();
